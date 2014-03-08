@@ -17,7 +17,7 @@ protected
 
     forwarded_ips = request.headers['HTTP_X_FORWARDED_FOR'] ?
       request.headers['HTTP_X_FORWARDED_FOR'].strip.split(/[,\s]+/) : []
-    logger.debug('remote_addrs: ' + remote_addrs.to_s)
+    logger.info('remote_addrs: ' + remote_addrs.to_s)
 
     if client_ip = request.headers['HTTP_CLIENT_IP']
       # If forwarded_ips doesn't include the client_ip, it might be an
@@ -28,7 +28,7 @@ protected
       end
     end
 
-    logger.debug('forwarded_ips: ' + forwarded_ips.to_s)
+    logger.info('forwarded_ips: ' + forwarded_ips.to_s)
 
     client_ip = forwarded_ips.reject { |ip| trusted_proxy?(ip) }.last
     request.headers['REMOTE_ADDR'] = client_ip if client_ip

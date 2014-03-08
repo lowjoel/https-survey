@@ -3,3 +3,7 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
 # Disallow: /
+
+# Prevent bots from contributing to statistics
+User-agent: *
+Disallow: /clients/collect

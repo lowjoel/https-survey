@@ -17,7 +17,8 @@ ClientSampler::Application.routes.draw do
   resources :clients, only: [:index] do
     collection do
       get 'privacy' => 'clients#privacy'
-      get 'sample/:protocol' => 'collector#collect'
+      get 'collect' => 'collector#index'
+      get 'collect/:protocol' => 'collector#collect'
     end
   end
 

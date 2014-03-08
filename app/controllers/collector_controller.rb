@@ -31,7 +31,7 @@ class CollectorController < ApplicationController
     if cookies[cookie_sym] then
       return send_image
     end
-    cookies[cookie_sym] = true
+    cookies.permanent[cookie_sym] = true
 
     headers = request.headers
     ClientSample.create({

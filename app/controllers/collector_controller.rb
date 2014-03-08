@@ -1,9 +1,12 @@
 class CollectorController < ApplicationController
 
+  # The ports corresponding to the ClientSample PROTOCOLS constant.
+  COLLECTOR_PORTS = [8009, 8010, 8011, 8012]
+
   def index
 
   end
-  
+
   def collect
     protocol = params[:protocol]
     case protocol

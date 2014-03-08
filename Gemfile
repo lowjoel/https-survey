@@ -43,8 +43,11 @@ gem 'puma'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Stuff for UI
+# Stuff for backend
+# Useragent parser
+gem 'useragent'
 
+# Stuff for UI
 # Bootstrap-sass
 gem 'bootstrap-sass'
 

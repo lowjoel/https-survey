@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body class="site">
 
 <div class="container">
 <nav class="navbar navbar-default" role="navigation">
@@ -36,8 +36,16 @@
   <!-- /.container-fluid -->
 </nav>
 
+<div class="<%= params[:controller] %>">
 <%= yield %>
-
 </div>
+</div>
+
+<footer><div class="container">
+  <ul class="links">
+    <li><%= link_to('Privacy Policy', privacy_clients_path) %></li>
+  </ul>
+</div></footer>
+
 </body>
 </html>

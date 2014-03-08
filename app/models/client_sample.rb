@@ -6,6 +6,6 @@ class ClientSample < ActiveRecord::Base
 private
   # Synchronises the useragent string with the individual columns.
   def sync_client_info
-
+    ##TODO: implement this.
   end
 end

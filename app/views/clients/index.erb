@@ -1,2 +1,9 @@
 <h1>Client Statistics</h1>
-<%= pie_chart @ssl_versions %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#protocol" data-toggle="tab">Broken down by protocol</a></li>
+  <li><a href="#platform_then_protocol" data-toggle="tab">Broken down by Platform</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="protocol"><%= pie_chart @ssl_versions %></div>
+  <div class="tab-pane" id="platform_then_protocol"><%= pie_chart @ssl_versions_by_platform %></div>
+</div>

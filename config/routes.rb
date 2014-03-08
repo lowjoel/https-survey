@@ -16,8 +16,13 @@ ClientSampler::Application.routes.draw do
 
   resources :clients, only: [:index] do
     collection do
+      get 'privacy' => 'clients#privacy'
       get 'sample/:protocol' => 'collector#collect'
     end
+  end
+
+  resources :servers, only: [:index] do
+
   end
 
   # Example resource route with options:

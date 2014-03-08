@@ -1,5 +1,9 @@
 class CollectorController < ApplicationController
 
+  def index
+
+  end
+  
   def collect
     protocol = params[:protocol]
     case protocol

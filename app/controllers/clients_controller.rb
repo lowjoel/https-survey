@@ -4,6 +4,8 @@ class ClientsController < ApplicationController
     @ssl_versions = map_versions_to_strings(ClientSample.group(:protocol).count)
     @ssl_versions_by_platform = ClientSample.group(:platform_id, :protocol).count
     @ssl_versions_by_platform = map_platforms_to_strings(@ssl_versions_by_platform)
+    @ssl_versions_by_browser = ClientSample.group(:browser_id, :protocol).count
+    @ssl_versions_by_browser = map_browsers_to_strings(@ssl_versions_by_browser)
   end
 
   def privacy
@@ -38,6 +40,30 @@ private
     result.each_pair do |platform, value|
       map_versions_to_strings(value).each_pair do |protocol, value|
         result2["#{platform}, #{protocol}"] = value
+      end
+    end
+
+    return result2
+  end
+
+  def map_browsers_to_strings(browsers)
+    result = {}
+    all_browsers = {}
+    ClientBrowser.all.each do |p|
+      all_browsers[p.id] = p.browser
+    end
+
+    browsers.each_pair do |key, value|
+      browser = all_browsers[key[0]]
+      protocol = key[1]
+      result[browser] = {} unless result[browser]
+      result[browser][protocol] = value
+    end
+
+    result2 = {}
+    result.each_pair do |browser, value|
+      map_versions_to_strings(value).each_pair do |protocol, value|
+        result2["#{browser}, #{protocol}"] = value
       end
     end
 

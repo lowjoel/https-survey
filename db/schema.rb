@@ -11,12 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307150941) do
+ActiveRecord::Schema.define(version: 20140308050934) do
+
+  create_table "client_browsers", force: true do |t|
+    t.string   "browser"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_oses", force: true do |t|
+    t.string   "os"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_platforms", force: true do |t|
+    t.string   "platform"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "client_samples", force: true do |t|
     t.string   "ip_address"
     t.integer  "protocol"
     t.string   "useragent"
+    t.integer  "browser"
+    t.string   "version"
+    t.integer  "platform"
+    t.integer  "os"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 20140308050934) do
     t.string   "ip_address"
     t.integer  "protocol"
     t.string   "useragent"
-    t.integer  "browser"
+    t.integer  "browser_id"
     t.string   "version"
-    t.integer  "platform"
-    t.integer  "os"
+    t.integer  "platform_id"
+    t.integer  "os_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

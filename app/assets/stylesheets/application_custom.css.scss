@@ -1,0 +1,18 @@
+@import "bootstrap";
+@import "bootstrap/theme";
+
+body.site > footer {
+  margin: 6em 0;
+  padding: 2em;
+  text-align: center;
+  border-top: 1px solid $modal-header-border-color;
+
+  ul.links {
+    list-style-type: none;
+    padding: 0;
+
+    &>li {
+      display: inline-block
+    }
+  }
+}

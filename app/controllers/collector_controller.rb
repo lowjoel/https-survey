@@ -5,11 +5,20 @@ class CollectorController < ApplicationController
   # The ports corresponding to the ClientSample PROTOCOLS constant.
   COLLECTOR_PORTS = [8009, 8010, 8011, 8012]
 
+  # These browsers will be ignored.
+  BLACKLISTED_BROWSERS = (Set.new ['facebookexternalhit']).freeze
+
   def index
 
   end
 
   def collect
+    headers = request.headers
+    if is_blacklisted?(headers['HTTP_USER_AGENT'])
+      logger.info("Ignoring #{headers['HTTP_USER_AGENT']}")
+      return send_image
+    end
+
     protocol = params[:protocol]
     case protocol
       when 'ssl3'
@@ -33,7 +42,6 @@ class CollectorController < ApplicationController
     end
     cookies.permanent[cookie_sym] = true
 
-    headers = request.headers
     ClientSample.create({
                           protocol: protocol,
                           ip_address: headers['REMOTE_ADDR'],
@@ -44,6 +52,11 @@ class CollectorController < ApplicationController
   end
 
 private
+  def is_blacklisted?(useragent)
+    ua = UserAgent.parse(useragent)
+    return BLACKLISTED_BROWSERS.include?(ua.browser)
+  end
+
   def send_image
     blank_image = File.open(File.join(Rails.root, 'app/assets/images/blank.png'), 'rb') do |f|
       f.read

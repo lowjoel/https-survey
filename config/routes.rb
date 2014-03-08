@@ -14,6 +14,9 @@ ClientSampler::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  root 'main#index'
+  get 'about' => 'main#about'
+
   resources :clients, only: [:index] do
     collection do
       get 'privacy' => 'clients#privacy'

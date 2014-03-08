@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308050934) do
+ActiveRecord::Schema.define(version: 20140308063558) do
 
   create_table "client_browsers", force: true do |t|
     t.string   "browser"
@@ -19,17 +19,23 @@ ActiveRecord::Schema.define(version: 20140308050934) do
     t.datetime "updated_at"
   end
 
+  add_index "client_browsers", ["browser"], name: "index_client_browsers_on_browser", unique: true, using: :btree
+
   create_table "client_oses", force: true do |t|
     t.string   "os"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "client_oses", ["os"], name: "index_client_oses_on_os", unique: true, using: :btree
+
   create_table "client_platforms", force: true do |t|
     t.string   "platform"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "client_platforms", ["platform"], name: "index_client_platforms_on_platform", unique: true, using: :btree
 
   create_table "client_samples", force: true do |t|
     t.string   "ip_address"
@@ -42,5 +48,10 @@ ActiveRecord::Schema.define(version: 20140308050934) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "client_samples", ["browser_id"], name: "index_client_samples_on_browser_id", using: :btree
+  add_index "client_samples", ["os_id"], name: "index_client_samples_on_os_id", using: :btree
+  add_index "client_samples", ["platform_id"], name: "index_client_samples_on_platform_id", using: :btree
+  add_index "client_samples", ["protocol"], name: "index_client_samples_on_protocol", using: :btree
 
 end

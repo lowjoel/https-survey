@@ -1,5 +1,4 @@
 ClientSampler::Application.routes.draw do
-  get "collector_controller/collect"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,7 +14,13 @@ ClientSampler::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  get 'clients/sample/:protocol' => 'collector#collect'
+  resources :clients, only: [] do
+    collection do
+      get 'index'
+      get 'sample/:protocol' => 'collector#collect'
+    end
+  end
+
   # Example resource route with options:
   #   resources :products do
   #     member do

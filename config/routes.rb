@@ -14,9 +14,8 @@ ClientSampler::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :clients, only: [] do
+  resources :clients, only: [:index] do
     collection do
-      get 'index'
       get 'sample/:protocol' => 'collector#collect'
     end
   end

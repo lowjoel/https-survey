@@ -3,7 +3,7 @@
 
 <h2>Repercussions</h2>
 <p>What does this mean for us? At the best case &dash; nothing at all. We hope that these standards are safe the first time it is designed. But very often it is not, thus there is a possibility that some of our devices have got security loopholes in the software.</p>
-<p>One of the things which we use the most are our web browsers. These programs have an embedded SSL and TLS library as well. However, even with advances in the TLS specification, it has taken an average of (x?) years for browsers to implement them and reach the masses. This project tries to capture the various browsers that are in use today, and determine the proportion of them which implement the latest version of the TLS standard.</p>
+<p>One of the things which we use the most are our web browsers. These programs have an embedded SSL and TLS library as well. However, even with advances in the TLS specification, it has taken an average of 5 years for browsers to implement them and reach the masses<a href="#footnote1" id="ref1"><sup>1</sup></a>. This project tries to capture the various browsers that are in use today, and determine the proportion of them which implement the latest version of the TLS standard.</p>
 <p>One must also remember that in any protocol there are two implementations involved: the user-facing side, which is the web browser, or your mobile app; as well as the back-end which the user does not directly interact with. As such, this project will attempt to analyse both the client and server ends of the SSL/TLS implementation.</p>
 <p>For the server-side, I will be finding a list of sites that Singaporeans frequently access, and determine possible improvements in their site configuration. Alexa maintains a list of popular sites (ordered by hits) that I will be using as a reference to determine popularity. I will then run SSLabs' excellent security test suite on those sites identified, and compile them here.</p>
 
@@ -12,3 +12,7 @@
 
 <h2>Participation</h2>
 <p>This project will use some techniques to try to identify the technologies both servers and client-side programs are using. They will be anonymous (see the <a href="/clients/privacy">Privacy Policy</a> for details) and require almost no effort on your part. However, the aggregate data coming from all visitors can be used to draw conclusions which we may not currently be aware of, especially when formulating recommendations and best practices.</p>
+
+<hr />
+<sup id="footnote1">1</sup> SSL3 was drafted in 1996, TLS1 was drafted in 1999, TLS 1.1 was drafted in 2006, and TLS 1.2 was drafted in August 2008. TLS1 support has been in all major browsers in use today since they were made available (see <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">Wikipedia's</a> article.) However, TLS 1.1 did not see implementations in the browsers until the about last two years (2012) or so; TLS 1.2 has only seen wide adoption in the last year. This is how I derived the five-year lag between definition and wide implementation. There are, however, browsers which implement the new standards ahead of the rest.<a href="#ref1" title="Back to footnote 1.">↩</a></sup>
+

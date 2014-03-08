@@ -9,6 +9,8 @@ private
   end
 
 protected
+  # This will parse any proxy forwarding headers. This can be used as an action filter, like so:
+  # before_action :patch_ip
   def patch_ip
     remote_addrs = request.headers['REMOTE_ADDR'] ? request.headers['REMOTE_ADDR'].split(/[,\s]+/) : []
     remote_addrs.reject! { |addr| trusted_proxy?(addr) }

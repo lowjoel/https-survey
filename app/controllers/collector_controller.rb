@@ -18,10 +18,10 @@ class CollectorController < ApplicationController
       when 'tls1'
         protocol = 1
         cookie_sym = :client_collected_tls1
-      when 'tls1.1'
+      when 'tls11'
         protocol = 2
         cookie_sym = :client_collected_tls11
-      when 'tls1.2'
+      when 'tls12'
         protocol = 3
         cookie_sym = :client_collected_ssl12
       else

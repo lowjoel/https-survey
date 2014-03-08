@@ -1,2 +1,9 @@
 <h1>Participate</h1>
+<div class="collection">
+<% CollectorController::COLLECTOR_PORTS.each_index do |i| %>
+  <img src="https://<%= request.host %>:<%= CollectorController::COLLECTOR_PORTS[i] %>"
+       alt="Your browser could not understand <%= ClientSample::PROTOCOLS[i] %>" class="collection" />
+<% end %>
+</div>
+
 <p>Thanks for participating! Your information will help build a clearer picture of the state of security in Singapore.</p>

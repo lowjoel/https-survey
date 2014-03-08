@@ -27,6 +27,7 @@ class CollectorController < ApplicationController
     headers = request.headers
     ClientSample.create({
                           protocol: protocol,
+                          ip_address: headers['REMOTE_ADDR'],
                           useragent: headers['HTTP_USER_AGENT']
                         })
 

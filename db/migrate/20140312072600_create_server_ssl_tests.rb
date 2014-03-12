@@ -7,6 +7,6 @@ class CreateServerSslTests < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_index :server_ssl_tests, :server_most_visit_id, unique: true
+    add_index :server_ssl_tests, :server_most_visit_id, unique: true
   end
 end

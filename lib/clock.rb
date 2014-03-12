@@ -3,6 +3,10 @@ require '../config/boot'
 require '../config/environment'
 
 module Clockwork
+  configure do |config|
+    config[:logger] = Logger.new(File.expand_path(File.join(File.dirname(__FILE__), '..', 'log', 'clockwork.log')))
+  end
+
   handler do |job|
     puts "Running #{job}"
   end

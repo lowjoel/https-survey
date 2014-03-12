@@ -95,7 +95,7 @@ private
     for i in 0...versions.length do
       version = versions[i]
       compliance = compliances[i]
-      result.protocols <<= version.content if compliance.content == 'Yes'
+      result.protocols <<= version.content if compliance.content.strip == 'Yes'
     end
 
     return result

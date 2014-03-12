@@ -47,6 +47,9 @@ gem 'puma'
 # Useragent parser
 gem 'useragent'
 
+# For parsing web pages
+gem 'nokogiri'
+
 # Stuff for UI
 # Bootstrap-sass
 gem 'bootstrap-sass'

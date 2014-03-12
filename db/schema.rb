@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308063558) do
+ActiveRecord::Schema.define(version: 20140312071214) do
 
   create_table "client_browsers", force: true do |t|
     t.string   "browser"
@@ -53,5 +53,31 @@ ActiveRecord::Schema.define(version: 20140308063558) do
   add_index "client_samples", ["os_id"], name: "index_client_samples_on_os_id", using: :btree
   add_index "client_samples", ["platform_id"], name: "index_client_samples_on_platform_id", using: :btree
   add_index "client_samples", ["protocol"], name: "index_client_samples_on_protocol", using: :btree
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "server_most_visits", force: true do |t|
+    t.integer  "rank"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "server_most_visits", ["rank"], name: "index_server_most_visits_on_rank", using: :btree
+  add_index "server_most_visits", ["url"], name: "index_server_most_visits_on_url", unique: true, using: :btree
 
 end

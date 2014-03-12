@@ -54,6 +54,7 @@ gem 'nokogiri'
 gem 'clockwork'
 gem 'daemonize'
 gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 # Stuff for UI
 # Bootstrap-sass

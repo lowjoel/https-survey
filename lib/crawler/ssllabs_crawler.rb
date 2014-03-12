@@ -21,6 +21,14 @@ private
       @protocols = []
     end
 
+    def rating
+      @rating
+    end
+
+    def rating=(value)
+      @rating = value
+    end
+
     def protocols
       @protocols
     end
@@ -94,6 +102,29 @@ private
 
     if !result then
       return nil
+    end
+
+    # See the grade of the server
+    doc.css('div.rating_g > span').each do |span|
+      result.rating = case span.content.strip
+                        when 'F'
+                          0
+                        when 'E'
+                          1
+                        when 'D'
+                          2
+                        when 'C'
+                          3
+                        when 'B'
+                          4
+                        when 'A-'
+                          5
+                        when 'A'
+                          6
+                        when 'A+'
+                          7
+
+                      end
     end
 
     # See which protocols are supported

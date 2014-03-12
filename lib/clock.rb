@@ -1,6 +1,6 @@
 require 'clockwork'
-require '../config/boot'
-require '../config/environment'
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'boot'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
 
 module Clockwork
   configure do |config|

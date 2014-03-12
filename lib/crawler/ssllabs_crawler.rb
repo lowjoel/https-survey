@@ -9,7 +9,26 @@ class SsllabsCrawler < Struct.new(:url)
     host = URI("https://#{uri.host}")
 
     begin
-      query(host)
+      # Perform the look up
+      results = query(host)
+
+      # Store it into the database
+      ServerSslTest.transaction do
+        server = server_most_visits.find_or_create_by_url(url)
+
+        test = ServerSslTest.new(server_most_visit: server,
+                                 last_tested: Time.now)
+        results.each_pair do |ip, result|
+          ServerSslTestResult.create(server_ssl_test: test,
+                                     ip: ip,
+                                     ssl3: result.protocols.contains?(:ssl3),
+                                     tls1: result.protocols.contains?(:tls1),
+                                     tls11: result.protocols.contains?(:tls11),
+                                     tls12: result.protocols.contains?(:tls12))
+        end
+
+        test.save
+      end
     rescue => e
     end
   end
@@ -55,6 +74,8 @@ private
     ips.each do |ip|
       results[ip] = get_result_for_ip(url, ip)
     end
+
+    return results
   end
 
   # Starts the test
@@ -135,7 +156,18 @@ private
     for i in 0...versions.length do
       version = versions[i]
       compliance = compliances[i]
-      result.protocols <<= version.content if compliance.content.strip == 'Yes'
+      result.protocols <<= case version.content.strip
+                             when 'TLS 1.2'
+                               :tls12
+                             when 'TLS 1.1'
+                               :tls11
+                             when 'TLS 1.0'
+                               :tls1
+                             when 'SSL 3'
+                               :ssl3
+                             when 'SSL 2'
+                               :ssl2
+                           end if compliance.content.strip == 'Yes'
     end
 
     return result

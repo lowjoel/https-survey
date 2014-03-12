@@ -1,9 +1,5 @@
 require 'clockwork'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'boot'))
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
-
-require_relative 'crawler/alexa_top_sites_crawler'
-require_relative 'crawler/maintain_test_results'
 
 module Clockwork
   configure do |config|
@@ -20,9 +16,9 @@ module Clockwork
   # end
 
   every(1.day, 'alexa.refresh', :at => '00:00') do
-    Delayed::Job.enqueue AlexaTopSitesCrawler.new
+    Delayed::Job.enqueue Crawler::AlexaTopSitesCrawler.new
   end
   every(1.day, 'ssl_test.refresh', :at => '00:30') do
-    Delayed::Job.enqueue MaintainTestResults.new
+    Delayed::Job.enqueue Crawler::MaintainTestResults.new
   end
 end

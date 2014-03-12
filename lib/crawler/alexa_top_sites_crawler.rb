@@ -44,5 +44,3 @@ private
     end
   end
 end
-
-(AlexaTopSitesCrawler.new).perform

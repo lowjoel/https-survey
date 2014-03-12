@@ -50,6 +50,10 @@ gem 'useragent'
 # For parsing web pages
 gem 'nokogiri'
 
+# And maintaining server statistics
+gem 'clockwork'
+gem 'daemonize'
+
 # Stuff for UI
 # Bootstrap-sass
 gem 'bootstrap-sass'

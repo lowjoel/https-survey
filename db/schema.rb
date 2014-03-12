@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312072600) do
+ActiveRecord::Schema.define(version: 20140312103041) do
 
   create_table "client_browsers", force: true do |t|
     t.string   "browser"
@@ -79,6 +79,18 @@ ActiveRecord::Schema.define(version: 20140312072600) do
 
   add_index "server_most_visits", ["rank"], name: "index_server_most_visits_on_rank", using: :btree
   add_index "server_most_visits", ["url"], name: "index_server_most_visits_on_url", unique: true, using: :btree
+
+  create_table "server_ssl_test_results", force: true do |t|
+    t.integer  "server_ssl_test_id"
+    t.string   "ip"
+    t.boolean  "ssl3"
+    t.boolean  "tls1"
+    t.boolean  "tls11"
+    t.boolean  "tls12"
+    t.integer  "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "server_ssl_tests", force: true do |t|
     t.integer  "server_most_visit_id"

@@ -9,7 +9,7 @@ class SsllabsCrawler < Struct.new(:url)
     host = URI("https://#{uri.host}")
 
     begin
-      ssl_test(host)
+      query(host)
     rescue => e
     end
   end
@@ -17,7 +17,17 @@ class SsllabsCrawler < Struct.new(:url)
 private
   # The summary results that the crawler returns after running SSLLab's tests.
   class Result
+    def initialize
+      @protocols = []
+    end
 
+    def protocols
+      @protocols
+    end
+
+    def protocols=(value)
+      @protocols = value
+    end
   end
 
   # Queries SSLLabs for the HTTPS implementation of the given site.
@@ -32,6 +42,11 @@ private
 
     # See if we have a multi-site result
     ips = get_ips(url)
+
+    results = {}
+    ips.each do |ip|
+      results[ip] = get_result_for_ip(url, ip)
+    end
   end
 
   # Starts the test
@@ -56,8 +71,34 @@ private
   end
 
   # Gets the result for the given IP
-  def get_result_for_ip(url, ip)
+  def get_result_for_ip(url, ip = nil)
+    url = ip ? (SSL_LABS_IP_RESULT_URL % [url, ip]) : (SSL_LABS_RESULT_URL % [url])
+    doc = Nokogiri::HTML(open(url))
 
+    # Wait for the results to be out.
+    while doc.css('div#warningBox img[src="/images/progress-indicator.gif"]').count > 0 do
+      sleep(60)
+      doc = Nokogiri::HTML(open(url))
+    end
+
+    # Check that we do not have an error
+    doc.css('div#warningBox').each do |warning|
+      raise StandardError.new(warning.content)
+    end
+
+    # See which protocols are supported
+    result = Result.new
+    table = doc.css('img[src="/images/icon-protocol.gif"]')[0].next_element
+    versions = table.css('tbody > tr > td.tableLeft')
+    compliances = table.css('tbody > tr > td.tableRight')
+
+    for i in 0...versions.length do
+      version = versions[i]
+      compliance = compliances[i]
+      result.protocols <<= version.content if compliance.content == 'Yes'
+    end
+
+    return result
   end
 
 private

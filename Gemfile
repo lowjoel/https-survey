@@ -53,6 +53,7 @@ gem 'nokogiri'
 # And maintaining server statistics
 gem 'clockwork'
 gem 'daemonize'
+gem 'delayed_job'
 
 # Stuff for UI
 # Bootstrap-sass

@@ -35,10 +35,10 @@ private
   # @return An array containing one result for each IP of the site.
   def query(url)
     # Clear the cache and trigger the test.
-    start(url)
+    #start(url)
 
     # We can wait for about 15 seconds.
-    sleep(15)
+    #sleep(15)
 
     # See if we have a multi-site result
     ips = get_ips(url)
@@ -82,12 +82,21 @@ private
     end
 
     # Check that we do not have an error
+    result = Result.new
     doc.css('div#warningBox').each do |warning|
-      raise StandardError.new(warning.content)
+      warning = warning.content
+      if warning.include? 'Certificate name mismatch' then
+        result = nil
+      else
+        raise StandardError.new(warning.content)
+      end
+    end
+
+    if !result then
+      return nil
     end
 
     # See which protocols are supported
-    result = Result.new
     table = doc.css('img[src="/images/icon-protocol.gif"]')[0].next_element
     versions = table.css('tbody > tr > td.tableLeft')
     compliances = table.css('tbody > tr > td.tableRight')

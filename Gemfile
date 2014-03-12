@@ -52,7 +52,7 @@ gem 'nokogiri'
 
 # And maintaining server statistics
 gem 'clockwork'
-gem 'daemonize'
+gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 

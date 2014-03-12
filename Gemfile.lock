@@ -41,7 +41,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    daemonize (0.0.1)
+    daemons (1.1.9)
     delayed_job (4.0.0)
       activesupport (>= 3.0, < 4.1)
     delayed_job_active_record (4.0.0)
@@ -131,7 +131,7 @@ DEPENDENCIES
   bootstrap-sass
   chartkick
   clockwork
-  daemonize
+  daemons
   delayed_job
   delayed_job_active_record
   jbuilder (~> 1.2)

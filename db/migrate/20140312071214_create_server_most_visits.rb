@@ -7,6 +7,7 @@ class CreateServerMostVisits < ActiveRecord::Migration
       t.timestamps
     end
 
+    add_index :server_most_visits, :rank
     add_index :server_most_visits, :url, unique: true
   end
 end

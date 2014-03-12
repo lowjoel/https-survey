@@ -37,8 +37,8 @@ private
       ServerMostVisit.update_all 'rank = NULL'
 
       sites.each_index do |i|
-        site = ServerMostVisit.find_or_create_by_site(sites[i])
-        site.rank = i + i
+        site = ServerMostVisit.find_or_create_by_url(sites[i])
+        site.rank = i + 1
         site.save
       end
     end

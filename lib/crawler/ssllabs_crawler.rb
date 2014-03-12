@@ -14,17 +14,18 @@ class SsllabsCrawler < Struct.new(:url)
 
       # Store it into the database
       ServerSslTest.transaction do
-        server = server_most_visits.find_or_create_by_url(url)
+        server = ServerMostVisit.find_or_create_by_url(url)
 
         test = ServerSslTest.new(server_most_visit: server,
                                  last_tested: Time.now)
         results.each_pair do |ip, result|
+          next if !result
           ServerSslTestResult.create(server_ssl_test: test,
                                      ip: ip,
-                                     ssl3: result.protocols.contains?(:ssl3),
-                                     tls1: result.protocols.contains?(:tls1),
-                                     tls11: result.protocols.contains?(:tls11),
-                                     tls12: result.protocols.contains?(:tls12))
+                                     ssl3: result.protocols.include?(:ssl3),
+                                     tls1: result.protocols.include?(:tls1),
+                                     tls11: result.protocols.include?(:tls11),
+                                     tls12: result.protocols.include?(:tls12))
         end
 
         test.save

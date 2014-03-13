@@ -3,10 +3,9 @@ require 'nokogiri'
 require 'open-uri'
 
 module Crawler
-  class SsllabsCrawler < Struct.new(:url)
+  class SsllabsCrawler < Struct.new(:hostname)
     def perform
       # Parse the URL, changing http:// to https://
-      uri = URI.parse(url)
       host = URI("https://#{uri.host}")
 
       begin

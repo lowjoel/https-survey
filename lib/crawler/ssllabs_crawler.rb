@@ -181,4 +181,3 @@ module Crawler
     SSL_LABS_IP_RESULT_URL = 'https://www.ssllabs.com/ssltest/analyze.html?hideResults=on&d=%s&s=%s'
   end
 end
-Crawler::SsllabsCrawler.new('www.google.com.sg').perform

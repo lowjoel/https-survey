@@ -31,6 +31,7 @@ module Crawler
           test.save
         end
       rescue => e
+        raise e
       end
     end
 

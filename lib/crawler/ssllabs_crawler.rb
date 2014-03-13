@@ -73,8 +73,12 @@ module Crawler
       ips = get_ips(url)
 
       results = {}
-      ips.each do |ip|
-        results[ip] = get_result_for_ip(url, ip)
+      if ips.count == 0 then
+        results[nil] = get_result_for_ip(url)
+      else
+        ips.each do |ip|
+          results[ip] = get_result_for_ip(url, ip)
+        end
       end
 
       return results

@@ -25,7 +25,8 @@ module Crawler
                                        ssl3: result.protocols.include?(:ssl3),
                                        tls1: result.protocols.include?(:tls1),
                                        tls11: result.protocols.include?(:tls11),
-                                       tls12: result.protocols.include?(:tls12))
+                                       tls12: result.protocols.include?(:tls12),
+                                       grade: result.rating)
           end
 
           test.save

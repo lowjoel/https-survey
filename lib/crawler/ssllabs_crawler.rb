@@ -14,7 +14,7 @@ module Crawler
 
         # Store it into the database
         ServerSslTest.transaction do
-          server = ServerMostVisit.find_or_create_by_url(url)
+          server = ServerMostVisit.find_or_create_by_url(hostname)
 
           test = ServerSslTest.new(server_most_visit: server,
                                    last_tested: Time.now)
@@ -64,10 +64,10 @@ module Crawler
     # @return An array containing one result for each IP of the site.
     def query(url)
       # Clear the cache and trigger the test.
-      #start(url)
+      start(url)
 
       # We can wait for about 15 seconds.
-      #sleep(15)
+      sleep(15)
 
       # See if we have a multi-site result
       ips = get_ips(url)
@@ -181,3 +181,4 @@ module Crawler
     SSL_LABS_IP_RESULT_URL = 'https://www.ssllabs.com/ssltest/analyze.html?hideResults=on&d=%s&s=%s'
   end
 end
+Crawler::SsllabsCrawler.new('www.google.com.sg').perform

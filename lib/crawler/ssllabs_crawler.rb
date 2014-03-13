@@ -94,6 +94,9 @@ module Crawler
     def get_ips(url)
       doc = Nokogiri::HTML(open(SSL_LABS_RESULT_URL % [url]))
 
+      doc.css('div.submitError').each do |error|
+        raise StandardError.new(error.content)
+      end
       if doc.css('table#multiTable').count == 0 then
         return []
       end

@@ -128,7 +128,7 @@ module Crawler
       end
 
       # See the grade of the server
-      doc.css('div.rating_g').each do |span|
+      doc.css('div#rating > div.rating_g, div#rating > div.rating_a, div#rating > div.rating_r').each do |span|
         result.rating = case span.content.strip
                           when 'F'
                             0

@@ -6,7 +6,7 @@ module Crawler
   class SsllabsCrawler < Struct.new(:hostname)
     def perform
       # Parse the URL, changing http:// to https://
-      host = URI("https://#{uri.host}")
+      host = URI("https://#{hostname}")
 
       begin
         # Perform the look up

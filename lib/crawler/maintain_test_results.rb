@@ -5,7 +5,13 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'config',
 module Crawler
   class MaintainTestResults
     def perform
-      ServerSslTest.latest.where('last_tested < ?', Time.now - 1.day).each do |test|
+      # Test all untested servers
+      ServerMostVisit.with_untested.each do |server|
+        Delayed::Job.enqueue SsllabsCrawler.new(server.url)
+      end
+
+      # Refresh all out-of-date tests
+      ServerSslTest.with_latest.where('last_tested < ?', Time.now - 1.day) do |test|
         Delayed::Job.enqueue SsllabsCrawler.new(test.server.url)
       end
     end

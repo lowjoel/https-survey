@@ -124,7 +124,7 @@ module Crawler
         if warning.include? 'Certificate name mismatch' then
           result = nil
         else
-          raise StandardError.new(warning.content)
+          raise StandardError.new(warning)
         end
       end
 

@@ -5,5 +5,6 @@ class ServerSslTest < ActiveRecord::Base
     server_ssl_tests.server_most_visit_id=sst.server_most_visit_id AND
     server_ssl_tests.last_tested=sst.last_tested') }
 
-  belongs_to :server, class_name: :ServerMostVisit
+  belongs_to :server_most_visit
+  alias :server :server_most_visit
 end

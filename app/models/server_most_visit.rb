@@ -4,5 +4,6 @@ class ServerMostVisit < ActiveRecord::Base
     where('server_ssl_tests.id IS NULL')
   }
 
-  has_many :tests, class_name: :server_ssl_test
+  has_many :server_ssl_test
+  alias :tests :server_ssl_test
 end

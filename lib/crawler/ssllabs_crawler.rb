@@ -124,7 +124,8 @@ module Crawler
       result = Result.new
       doc.css('div#warningBox').each do |warning|
         warning = warning.content
-        if warning.include? 'Certificate name mismatch' || warning.include? 'Unable to connect to server' then
+        if (warning.include? 'Certificate name mismatch') ||
+           (warning.include? 'Unable to connect to server') then
           result = nil
         else
           raise StandardError.new(warning)

@@ -134,8 +134,12 @@ module Crawler
       doc.css('div#warningBox').each do |warning|
         warning = warning.content
         if (warning.include? 'Certificate name mismatch') ||
-           (warning.include? 'Unable to connect to server') then
+           (warning.include? 'Unable to connect to server') ||
+           (warning.include? 'No route to host')then
+          # Ignore. Nothing lost here.
           result = nil
+        elsif (warning.include? 'No secure protocols supported') then
+          raise CrawlerError.new('No HTTPS Website')
         else
           raise StandardError.new(warning)
         end

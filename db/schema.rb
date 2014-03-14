@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312103041) do
+ActiveRecord::Schema.define(version: 20140314023509) do
 
   create_table "client_browsers", force: true do |t|
     t.string   "browser"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140312103041) do
   create_table "server_ssl_test_results", force: true do |t|
     t.integer  "server_ssl_test_id"
     t.string   "ip"
+    t.text     "error"
     t.boolean  "ssl3"
     t.boolean  "tls1"
     t.boolean  "tls11"

@@ -135,7 +135,7 @@ module Crawler
         warning = warning.content
         if (warning.include? 'Certificate name mismatch') ||
            (warning.include? 'Unable to connect to server') ||
-           (warning.include? 'No route to host')then
+           (warning.include? 'No route to host') then
           # Ignore. Nothing lost here.
           result = nil
         elsif (warning.include? 'No secure protocols supported') then

@@ -31,6 +31,15 @@ module Crawler
 
           test.save
         end
+      rescue CrawlerError => e
+        ServerSslTest.transaction do
+          server = ServerMostVisit.find_or_create_by_url(hostname)
+
+          test = ServerSslTest.new(server_most_visit: server,
+                                   last_tested: Time.now)
+          SeverSslTestResult.create(server_ssl_test: test,
+                                    error: e.message)
+        end
       rescue => e
         raise e
       end

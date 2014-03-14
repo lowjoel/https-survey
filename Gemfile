@@ -56,6 +56,9 @@ gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
+# Randomly pick stuff to update to spread out the update times
+gem 'randumb'
+
 # Stuff for UI
 # Bootstrap-sass
 gem 'bootstrap-sass'

@@ -37,8 +37,8 @@ module Crawler
 
           test = ServerSslTest.new(server_most_visit: server,
                                    last_tested: Time.now)
-          SeverSslTestResult.create(server_ssl_test: test,
-                                    error: e.message)
+          ServerSslTestResult.create(server_ssl_test: test,
+                                     error: e.message)
         end
       rescue => e
         raise e

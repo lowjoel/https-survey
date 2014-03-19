@@ -5,6 +5,10 @@ require 'open-uri'
 module Crawler
   class SsllabsCrawler < Struct.new(:hostname)
     def perform
+      if HOSTS_TO_IGNORE.include?(hostname) then
+        return
+      end
+      
       # Parse the URL, changing http:// to https://
       host = URI("https://#{hostname}")
 
@@ -200,5 +204,11 @@ module Crawler
     SSL_LABS_BASE_URL = 'https://www.ssllabs.com/ssltest/clearCache.html?hideResults=on&d=%s'
     SSL_LABS_RESULT_URL = 'https://www.ssllabs.com/ssltest/analyze.html?hideResults=on&d=%s'
     SSL_LABS_IP_RESULT_URL = 'https://www.ssllabs.com/ssltest/analyze.html?hideResults=on&d=%s&s=%s'
+    HOSTS_TO_IGNORE = Set.new(['singaporeair.com',
+                               'mom.gov.sg',
+                               'akamaihd.net',
+                               'bp.blogspot.com',
+                               'cloudfront.net',
+                               'developunit.info']).freeze
   end
 end

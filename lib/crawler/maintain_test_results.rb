@@ -19,7 +19,7 @@ module Crawler
       ServerSslTest.with_latest.where('server_ssl_tests.last_tested > ? AND
                                        server_ssl_tests.last_tested < ?',
                                       Time.now - 7.day, Time.now - 1.day).
-                                random(tests_count / 10) do |test|
+                                random(tests_count / 10).each do |test|
         Delayed::Job.enqueue SsllabsCrawler.new(test.server.url)
       end
     end

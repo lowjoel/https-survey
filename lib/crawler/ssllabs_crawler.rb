@@ -8,7 +8,7 @@ module Crawler
       if HOSTS_TO_IGNORE.include?(hostname) then
         return
       end
-      
+
       # Parse the URL, changing http:// to https://
       host = URI("https://#{hostname}")
 

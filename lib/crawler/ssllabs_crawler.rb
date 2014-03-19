@@ -155,24 +155,7 @@ module Crawler
 
       # See the grade of the server
       doc.css('div#rating > div.rating_g, div#rating > div.rating_a, div#rating > div.rating_r').each do |span|
-        result.rating = case span.content.strip
-                          when 'F'
-                            0
-                          when 'E'
-                            1
-                          when 'D'
-                            2
-                          when 'C'
-                            3
-                          when 'B'
-                            4
-                          when 'A-'
-                            5
-                          when 'A'
-                            6
-                          when 'A+'
-                            7
-                        end
+        result.rating = ServerSslTestResult::RATINGS.index(span.content.strip)
       end
 
       # See which protocols are supported

@@ -1,0 +1,11 @@
+div.servers {
+  div.tab-content {
+    & > .tab-pane {
+      min-height: 5em;
+
+      div.container {
+        padding: 2em;
+      }
+    }
+  }
+}

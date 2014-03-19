@@ -2,13 +2,18 @@
 <ul class="nav nav-tabs">
   <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
   <li><a href="#protocol" data-toggle="tab">Broken down by protocol</a></li>
+  <li><a href="#rating" data-toggle="tab">Broken down by rating</a></li>
 </ul>
 <div class="tab-content">
   <div class="active fade in tab-pane" id="home"><div class="container row-fluid">
     <p>Click on the tabs above to see the statistics, grouped in various ways.</p>
     <p>The servers sampled have been mainly gathered from the Alexa Top 500 sites for Singapore. There have been a few manual additions which might require SSL/TLS to be used (e.g. internet banking, shopping, government sites etc.) The owners of these sites have not yet been informed of my findings, hence in the interest of responsible disclosure, I will currently only publish aggregated information.</p>
+    <p>There are more samples than there are sites because each website might have multiple servers configured (e.g. for load balancing.) Each physical server constitutes one sample. Some sites also do not have SSL/TLS enabled.</p>
   </div></div>
   <div class="tab-pane fade" id="protocol"><div class="container row-fluid">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><%= pie_chart @ssl_versions %></div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><%= pie_chart @protocols %></div>
+  </div></div>
+  <div class="tab-pane fade" id="rating"><div class="container row-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><%= pie_chart @ratings %></div>
   </div></div>
 </div>

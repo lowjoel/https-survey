@@ -6,5 +6,7 @@ class ServerSslTest < ActiveRecord::Base
     server_ssl_tests.last_tested=sst.last_tested') }
 
   belongs_to :server_most_visit
+  has_many :server_ssl_test_results
+  alias :results :server_ssl_test_results
   alias :server :server_most_visit
 end
